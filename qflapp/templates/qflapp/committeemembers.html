@@ -1,0 +1,81 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+{% block title %}
+Committee
+{% endblock %}
+
+{% block content %}
+<div class="notice-board-wrapper">
+    <!-- Year Filter Form (same page) -->
+    <form method="GET" action="">
+        <label for="year_filter">Filter by Year:</label>
+        <select name="year" id="year_filter" class="form-control" onchange="this.form.submit()">
+            <!-- <option value="">All Years</option> -->
+            {% for year in years %}
+                <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+
+    <!-- <table>
+        <tr>
+            <th>Name</th>
+            <th>Designation</th>
+            <th>Photo</th>
+
+        </tr>
+        {% for committeemember in committeemembers %}
+        <tr>
+            <td>{{ committeemember.person.name }}</td>
+            <td>{{ committeemember.designation }}</td>
+            <td><img src="{{ committeemember.person.photo.url }}" alt="{{ person.name }}" style="width:50px; height:auto;"></td>
+
+            
+        </tr>
+        {% endfor %}
+    </table> -->
+    <!-- Committee Member Cards -->
+    <div class="committee-card-container" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; gap: 20px; margin-top: 20px;">
+        {% for committeemember in committeemembers %}
+            <div class="committee-card" style="position: relative; width: 250px; height: 350px; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+                <div class="card-image" style="width: 100%; height: 70%; overflow: hidden;">
+                    <img src="{{ committeemember.person.photo.url }}" alt="{{ committeemember.person.name }}" style="width: 100%; height: 100%; object-fit: fill; border-bottom: 1px solid #ddd;">
+                </div>
+                <div class="card-content" style="position: relative; background-color: #ffffff; padding: 10px; height: 30%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; transition: transform 0.3s ease;">
+                    <div class="name" style="font-weight: bold; font-size: 18px; margin-bottom: 5px;">{{ committeemember.person.name }}</div>
+                    <div class="designation" style="font-size: 16px; color: #666; display: none;">{{ committeemember.designation }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<script>
+    // Add hover effect for inline styles via JavaScript
+    const cards = document.querySelectorAll('.committee-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseover', function() {
+            this.style.transform = 'translateY(-10px)';
+            const cimg = this.querySelector('.card-image'); 
+            cimg.style.opacity = '0.5';  
+            const content = this.querySelector('.card-content');
+            content.style.transform = 'translateY(-30px)';
+            const designation = content.querySelector('.designation');
+            designation.style.display = 'block';
+        });
+
+        card.addEventListener('mouseout', function() {
+            this.style.transform = 'translateY(0)';
+            const cimg = this.querySelector('.card-image');  
+            cimg.style.opacity = '1'; 
+            const content = this.querySelector('.card-content');
+            content.style.transform = 'translateY(0)';
+            const designation = content.querySelector('.designation');
+            designation.style.display = 'none';
+        });
+    });
+</script>
+{% endblock %}

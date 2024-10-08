@@ -1,0 +1,30 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+{% block title %}
+Patrons
+{% endblock %}
+
+{% block content %}
+<div class="notice-board-wrapper">
+    <h2>Patrons</h2>
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Since</th>
+            <th scope="col">Designation</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for patron in patrons %}
+        <tr>
+            <td data-label="Name">{{ patron.name }}</td>
+            <td data-label="Since">{{ patron.since }}</td>
+            <td data-label="Designation">{{ patron.designation }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

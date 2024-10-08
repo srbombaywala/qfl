@@ -1,0 +1,17 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+{% block title %}
+Patron
+{% endblock %}
+
+{% block content %}
+
+<h2>Delete Patron</h2>
+<p>Are you sure you want to delete "{{ patron.name }}"?</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+
+{% endblock %}

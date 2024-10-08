@@ -1,0 +1,29 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+{% block title %}
+Notice Board
+{% endblock %}
+
+{% block content %}
+
+<div class="add-notice-wrapper">
+    <h2>Add a New Notice</h2>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_title">Title</label>
+            <input type="text" name="title" id="id_title" class="form-control" value="{{ form.title.value|stringformat:'' }}" placeholder="Enter Notice Title">
+        </div>
+    
+        <div class="form-group">
+            <label for="id_content">Content</label>
+            <textarea name="content" id="id_content" class="form-control" rows="5" placeholder="Enter Notice Content">{{ form.content.value|stringformat:'' }}</textarea>
+        </div>
+    
+        <button class="save-notice" type="submit">Save Notice</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+{% block title %}
+Persons
+{% endblock %}
+
+{% block content %}
+<div class="notice-board-wrapper">
+    <h2>Members</h2>
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in persons %}
+        <tr>
+            <td data-label="Name">{{ person.name }}</td>
+            <td data-label="Photo"><img src="{{ person.photo.url }}" alt="{{ person.name }}" style="width:50px; height:auto;"></td>
+            <td data-label="Actions">
+                <a class="edit-btn" href="{% url 'edit-person' person.id %}">Edit</a>
+                <form action="{% url 'delete-person' person.id %}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this person?');">
+                    {% csrf_token %}
+                    <button class="del-btn" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+    <a class="add-notice" href="{% url 'add-person' %}">Add Person</a>
+</div>
+{% endblock %}

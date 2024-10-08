@@ -1,0 +1,60 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+{% block title %}
+Edit Book
+{% endblock %}
+
+{% block content %}
+<div class="edit-notice-wrapper">
+    <h2>Edit Book</h2>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_code">Code</label>
+            <input type="text" name="code" id="id_code" class="form-control" value="{{ form.code.value}}" placeholder="Enter Code">
+        </div>
+
+        <div class="form-group">
+            <label for="id_title">Book Title</label>
+            <input type="text" name="title" id="id_title" class="form-control" value="{{ form.title.value}}" placeholder="Enter Title">
+        </div>
+
+        <div class="form-group">
+            <label for="id_author">Book Author</label>
+            <input type="text" name="author" id="id_author" class="form-control" value="{{ form.author.value}}" placeholder="Enter Author">
+        </div>
+        
+        <div class="form-group">
+            <label for="id_genre">Genre</label>
+            <select name="genre" id="id_genre" class="form-control">
+                {% for choice in form.genre.field.choices %}
+                    <option value="{{ choice.0 }}" {% if choice.0 == form.genre.value %}selected{% endif %}>
+                        {{ choice.1 }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="id_language">Language</label>
+            <select name="language" id="id_language" class="form-control">
+                {% for choice in form.language.field.choices %}
+                    <option value="{{ choice.0 }}" {% if choice.0 == form.language.value %}selected{% endif %}>
+                        {{ choice.1 }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="id_file_id">Book Link</label>
+            <input type="text" name="file_id" id="id_file_id" class="form-control" value="{{ form.file_id.value}}" placeholder="Enter Link">
+        </div>
+
+        <button class="save-changes" type="submit">Save Changes</button>
+    </form>
+
+</div>
+{% endblock %}

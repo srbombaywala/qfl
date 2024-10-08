@@ -1,0 +1,40 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+{% block title %}
+Notice Board
+{% endblock %}
+
+{% block content %}
+<div class="notice-board-wrapper">
+    <h2>Notice Board</h2>
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Content</th>
+            <th scope="col">Date Posted</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for notice in notices %}
+        <tr>
+            <td data-label="Title">{{ notice.title }}</td>
+            <td data-label="Content">{{ notice.content }}</td>
+            <td data-label="Date Posted">{{ notice.date_posted }}</td>
+            <td data-label="Actions">
+                <a class="edit-btn" href="{% url 'edit-notice' notice.id %}">Edit</a>
+                <form action="{% url 'delete-notice' notice.id %}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this notice?');">
+                    {% csrf_token %}
+                    <button class="del-btn" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="add-notice" href="{% url 'add-notice' %}">Add Notice</a>
+</div>
+{% endblock %}

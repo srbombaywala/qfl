@@ -1,0 +1,17 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+{% block title %}
+Notice Board
+{% endblock %}
+
+{% block content %}
+
+<h2>Delete Notice</h2>
+<p>Are you sure you want to delete "{{ notice.title }}"?</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+{% block title %}
+Books
+{% endblock %}
+
+{% block content %}
+<div class="notice-board-wrapper">
+    <h2>All Books</h2>
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Language</th>
+            <th scope="col">File-ID</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+        <tr>
+            <td data-label="Code">{{ book.code }}</td>
+            <td data-label="Title">{{ book.title }}</td>
+            <td data-label="Author">{{ book.author }}</td>
+            <td data-label="Genre">{{ book.genre }}</td>
+            <td data-label="Language">{{ book.language }}</td>
+            <td data-label="File-ID">{{ book.file_id }}</td>
+            <td data-label="Actions">
+                <a class="edit-btn" href="{% url 'edit-book' book.id %}">Edit</a>
+                <form action="{% url 'delete-book' book.id %}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this book?');">
+                    {% csrf_token %}
+                    <button class="del-btn" type="submit">Delete</button>
+                </form>
+            </td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="add-notice" href="{% url 'add-book' %}">Add Book</a>
+</div>
+{% endblock %}

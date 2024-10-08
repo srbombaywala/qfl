@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'qflapp/css/styles.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <title>{% block title %} The Qamar Free Library {% endblock %}</title>
+</head>
+<body>
+
+    <header class="header" id="header">
+        <nav class="navbar container">
+          <div class="navbar-inner">
+            <a href="#" class="brand">The Qamar Free Library</a>
+            <div class="burger" id="burger">
+              <span class="burger-line"></span>
+              <span class="burger-line"></span>
+              <span class="burger-line"></span>
+            </div>
+          </div>
+          <div class="navbar-block" id="menu">
+            <ul class="menu">
+              <li class="menu-item"><a href="{% url 'index' %}" class="menu-link">Home</a></li>
+              <li class="menu-item"><a href="{% url 'committeemember-page' %}" class="menu-link">Committee</a></li>
+              <li class="menu-item dropdown">
+                    <span class="dropdown-toggle menu-link">
+                    Books <i class="bx bx-chevron-down"></i>
+                    </span>
+                    <div class="dropdown-content">
+                        <ul class="dropdown-items">
+                          <li><a href="{% url 'book-page' %}?language=Urdu" class="dropdown-link">Urdu</a></li>
+                          <li><a href="{% url 'book-page' %}?language=Gujarati" class="dropdown-link">Gujarati</a></li>
+                          <li><a href="{% url 'book-page' %}?language=English" class="dropdown-link">English</a></li>
+                          <li><a href="{% url 'book-page' %}?language=Others" class="dropdown-link">Other</a></li>
+                        </ul>
+                    </div>
+              </li>
+              <li class="menu-item dropdown">
+                    <span class="dropdown-toggle menu-link">
+                    Membership <i class="bx bx-chevron-down"></i>
+                    </span>
+                    <div class="dropdown-content">
+                        <ul class="dropdown-items">
+                            <li><a href="#" class="dropdown-link">Patron</a></li>
+                            <li><a href="#" class="dropdown-link">Vice Patron</a></li>
+                            <li><a href="#" class="dropdown-link">Life Member</a></li>
+                            <li><a href="#" class="dropdown-link">Annual Member</a></li>
+                        </ul>
+                    </div>
+              </li>
+              
+              <li class="menu-item"><a href="{% url 'patron-page' %}" class="menu-link">Patrons</a></li>
+              {% if user.is_authenticated %}
+                <li class="menu-item dropdown">
+                  <span class="dropdown-toggle menu-link">
+                  Update Site <i class="bx bx-chevron-down"></i>
+                  </span>
+                  <div class="dropdown-content">
+                      <ul class="dropdown-items">
+                          <li><a href="{% url 'notice-board' %}" class="dropdown-link">Notice</a></li>
+                          <li><a href="{% url 'patron-board' %}" class="dropdown-link">Patrons</a></li>
+                          <li><a href="{% url 'person-board' %}" class="dropdown-link">Members</a></li>
+                          <li><a href="{% url 'committeemember-board' %}" class="dropdown-link">Committee</a></li>
+                          <li><a href="{% url 'book-board' %}" class="dropdown-link">Books</a></li>
+                      </ul>
+                  </div>
+                </li>
+                <li class="menu-item"><a href="{% url 'logout' %}" class="menu-link">Logout</a></li>
+              {% else %}
+                <li class="menu-item"><a href="#footer" class="menu-link">Contact Us</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        {% block content %}
+
+        {% endblock %}
+      </main>
+
+
+
+    
+      <footer id="footer">
+        <div class="footer-section">
+          <div class="footer-column">
+              <h3>Address</h3>
+              <p>123 Library St, City, Country</p>
+          </div>
+          <div class="footer-column">
+              <h3>Phone</h3>
+              <p>+123 456 7890</p>
+          </div>
+          <div class="footer-column">
+              <h3>Email</h3>
+              <p>contact@qflibrary.com</p>
+          </div>
+        </div>
+        <div class="info" style="display: flex;
+                                justify-content: center;
+                                color: var(--color-blue-600);
+                                font-size: var(--text-tiny);">
+            <p>(c)2024 Real Art | <a href="{% url 'login' %}"> S.R.Bombaywala </a></p>
+        </div>
+      </footer>
+
+<script src="{% static 'qflapp/js/script.js' %}"></script>
+</body>
+</html>

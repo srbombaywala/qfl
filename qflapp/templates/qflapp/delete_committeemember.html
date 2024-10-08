@@ -1,0 +1,17 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+{% block title %}
+Committee Member
+{% endblock %}
+
+{% block content %}
+
+<h2>Delete Person</h2>
+<p>Are you sure you want to delete "{{ committeemember.name }}"?</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+
+{% endblock %}

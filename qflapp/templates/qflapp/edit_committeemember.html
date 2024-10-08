@@ -1,0 +1,50 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+{% block title %}
+Edit Person
+{% endblock %}
+
+{% block content %}
+<div class="edit-notice-wrapper">
+    <h2>Edit Person</h2>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_person">Name</label>
+            <select name="person" id="id_person" class="form-control">
+                {% for person in form.person.field.queryset %}
+                    <option value="{{ person.id }}" {% if person.id == form.person.value %}selected{% endif %}>
+                        {{ person.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="id_year">Year</label>
+            <input type="text" name="year" id="id_year" value="{{ form.year.value}}" class="form-control" placeholder="Enter a year">
+        </div>
+
+        <div class="form-group">
+            <label for="id_designation">Designation for Selected Year</label>
+            <select name="designation" id="id_designation" class="form-control">
+                {% for choice in form.designation.field.choices %}
+                    <option value="{{ choice.0 }}" {% if choice.0 == form.designation.value %}selected{% endif %}>
+                        {{ choice.1 }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="id_order">Set the Priority Order</label>
+            <input type="text" name="order" id="id_order" value="{{ form.order.value}}" class="form-control" placeholder="Enter the order">
+        </div>
+    
+        <button class="save-notice" type="submit">Save Changes</button>
+    </form>
+
+</div>
+{% endblock %}

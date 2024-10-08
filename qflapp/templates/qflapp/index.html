@@ -1,0 +1,71 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+
+{% block title %}
+Home | The Qamar Free Library
+{% endblock %}
+
+{% block content %}
+    <section id="hero-section" class="hero-section">
+        <div class="overlay">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>The Qamar Free Library</h1>
+                    <p>Empowering Minds Through Knowledge</p>
+                </div>
+            </div>
+        </div>
+        <!-- Full-width image -->
+        <div class="hero-image">
+            <img src="{% static 'qflapp/images/qfl02.png' %}" alt="Library Image">
+        </div>
+    </section>
+    
+
+    <section id="about-section" class="about-section">
+        <div class="about-content">
+            <div class="about-text">
+                <div class="notice-section">
+                    <h2>Latest News</h2>
+                    <div class="news-container" id="news-container">
+                        {% if notices %}
+                            {% for notice in notices %}
+                                <div class="news-items-wrapper">
+                                    <div class="news-item">
+                                        <h3>{{ notice.title }}</h3>
+                                        <p>{{ notice.content }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>No notices available.</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <h2>About Us</h2>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate dignissimos vero quidem dicta nemo enim vitae laboriosam totam sit placeat inventore quia non exercitationem assumenda, ex, hic at, vel veritatis? Voluptatibus libero aliquid, quas, tenetur sequi nisi veniam quae tempore dolorum labore nam nemo. Ipsa facere accusamus dicta omnis amet!</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="gallery-section" class="gallery-section">
+        <h2>Photo Gallery</h2>
+        <div class="gallery-strip">
+            <div class="gallery-scroll">
+                <!-- {% for image in gallery_images %}
+                    <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                {% endfor %} -->
+                <img src="{% static 'qflapp/images/qfl02.png' %}" alt="Photo 1">
+                <img src="{% static 'qflapp/images/qfl01.jpg' %}" alt="Photo 2">
+                <img src="{% static 'qflapp/images/qfl02.png' %}" alt="Photo 1">
+                <img src="{% static 'qflapp/images/qfl01.jpg' %}" alt="Photo 2">
+
+            </div>
+        </div>
+    </section>
+    
+
+
+{% endblock %}

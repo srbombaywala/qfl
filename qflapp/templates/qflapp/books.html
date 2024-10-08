@@ -1,0 +1,110 @@
+{% extends 'qflapp/base.html' %}
+{% load static %}
+
+{% block title %}
+Books
+{% endblock %}
+
+{% block content %}
+<div class="notice-board-wrapper">
+    <h2>All Books</h2>
+    <input type="text" id="bookSearch" class="search-bar" style="    margin-left: 25%;
+        margin-bottom: 2rem;
+        line-height: 2rem;
+        border: 1px solid var(--color-blue-500);
+        border-radius: 5px;
+        padding: 2px 5px;
+        font-size: 1rem;" placeholder="Search by title, author, or genre" onkeyup="filterBooks()">
+    <table id="bookTable">
+        <thead>
+        <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Language</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                {% if book.file_id %}
+                <!-- If file_id is available, make the code clickable and show a read icon -->
+                <td data-label="Code">
+                    <a href="https://drive.google.com/file/d/{{ book.file_id }}/preview" target="_blank">
+                        <img src="{% static 'qflapp/images/read-icon.png' %}" alt="Read" style="width: 20px; margin-right: 5px;">
+                        {{ book.code }}
+                    </a>
+                </td>
+                {% else %}
+                <td data-label="Code">{{ book.code }}</td>
+                {% endif %}
+                <td data-label="Title">{{ book.title }}</td>
+                <td data-label="Author">{{ book.author }}</td>
+                <td data-label="Genre">{{ book.genre }}</td>
+                <td data-label="Language">{{ book.language }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Modal or iframe to display the PDF -->
+    <div id="pdfViewer" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); z-index:1000;">
+        <div style="position:relative; width:80%; height:80%; margin:auto; background-color:#fff; padding:20px;">
+            <iframe src="https://drive.google.com/file/d/1PrsH0m8i4Q7pVjXD1ozsUGa9mYBZhho4/preview" id="pdfIframe" style="width:100%; height:100%; border:none;"></iframe>
+            <button style="position:absolute; top:10px; right:10px;" onclick="closePDF()">Close</button>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    // Function to open the PDF viewer
+    function openPDF() {
+        document.getElementById("pdfViewer").style.display = "block";
+    }
+
+    // Function to close the PDF viewer
+    function closePDF() {
+        document.getElementById("pdfViewer").style.display = "none";
+    }
+
+    // Prevent right-click and disable print functionality
+    document.getElementById("pdfIframe").oncontextmenu = function() { return false; }
+
+    // Disable print dialog
+    window.onbeforeprint = function() {
+        document.getElementById("pdfIframe").style.display = "none";
+    };
+
+    window.onafterprint = function() {
+        document.getElementById("pdfIframe").style.display = "block";
+    };
+
+    function filterBooks() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("bookSearch");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("bookTable");
+        tr = table.getElementsByTagName("tr");
+    
+        // Loop through all table rows (except the first, which is the table header)
+        for (i = 1; i < tr.length; i++) {
+            tr[i].style.display = "none"; // Initially hide all rows
+            td = tr[i].getElementsByTagName("td");
+    
+            // Check if any of the relevant cells (Title, Author, or Genre) match the filter
+            for (var j = 1; j <= 3; j++) {
+                if (td[j]) {
+                    txtValue = td[j].textContent || td[j].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = ""; // Show the row if a match is found
+                        break; // Break out of the loop as soon as a match is found
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+{% endblock %}
