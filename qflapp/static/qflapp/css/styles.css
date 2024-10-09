@@ -943,7 +943,9 @@ table {
   @media screen and (max-width: 600px) {
     table {
       border: 0;
-      width: fit-content;
+      /* width: fit-content; */
+      width: 100%; /* Ensure the table takes the full width of the screen */
+      table-layout: auto; /* Allow the table to adjust based on content */
     }
   
     table caption {
