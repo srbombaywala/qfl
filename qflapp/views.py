@@ -5,7 +5,7 @@ from .forms import NoticeForm,PatronForm, PersonForm, CommitteeMemberForm,BookFo
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
-
+from cloudinary import uploader
 
 # Create your views here.
 def index(request):
@@ -172,6 +172,7 @@ def add_person(request):
         if form.is_valid():
             print("form is valid")
             form.save()
+            print(f"Uploaded file URL: {request.person.photo.url}")  # Log the Cloudinary file URL
             return redirect('person-board')  # Redirect to the person board
     else:
         form = PersonForm()
