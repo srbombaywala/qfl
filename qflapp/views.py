@@ -171,8 +171,8 @@ def add_person(request):
         form = PersonForm(request.POST, request.FILES)
         if form.is_valid():
             print("form is valid")
-            form.save()
-            print(f"Uploaded file URL: {request.person.photo.url}")  # Log the Cloudinary file URL
+            person = form.save()
+            print(f"Uploaded file URL: {person.photo.url}")  # Log the Cloudinary file URL
             return redirect('person-board')  # Redirect to the person board
     else:
         form = PersonForm()
