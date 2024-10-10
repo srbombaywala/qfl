@@ -146,10 +146,15 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'dfreyh9hk',
+#     'API_KEY': '862928214519364',
+#     'API_SECRET': '3f9oyRp8_Adu6kwFKgcJuvrJyG4',
+# }
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dfreyh9hk',
-    'API_KEY': '862928214519364',
-    'API_SECRET': '3f9oyRp8_Adu6kwFKgcJuvrJyG4',
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
