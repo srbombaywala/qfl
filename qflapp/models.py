@@ -24,7 +24,7 @@ class Patron(models.Model):
 
 class Person(models.Model):
     name = models.CharField(max_length=255)
-    photo = models.ImageField() 
+    photo = models.ImageField(upload_to='photo/')  # Assuming media handling is configured
 
     def __str__(self):
         return self.name
