@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from cloudinary.models import CloudinaryField
 
 class Notice(models.Model):
     title = models.CharField(max_length=200, blank=True, null=True)
@@ -24,7 +25,8 @@ class Patron(models.Model):
 
 class Person(models.Model):
     name = models.CharField(max_length=255)
-    photo = models.ImageField(upload_to='photo/')  # Assuming media handling is configured
+    # photo = models.ImageField(upload_to='photo/')  # Assuming media handling is configured
+    photo = CloudinaryField('photo')
 
     def __str__(self):
         return self.name
