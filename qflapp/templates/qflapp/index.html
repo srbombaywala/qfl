@@ -25,14 +25,14 @@ Home | The Qamar Free Library
 
     <section id="about-section" class="about-section">
         <div class="about-content">
-            <div class="about-text">
+            <div class="about-text" style="text-align: justify; line-height: 2rem;">
                 <div class="notice-section">
                     <h2>Latest News</h2>
                     <div class="news-container" id="news-container">
                         {% if notices %}
                             {% for notice in notices %}
-                                <div class="news-items-wrapper">
-                                    <div class="news-item">
+                                <div class="news-items-wrapper" style="border-bottom: 1px solid #fff; padding-top: 0.5rem;">
+                                    <div class="news-item" style="line-height: normal;">
                                         <h3>{{ notice.title }}</h3>
                                         <p>{{ notice.content }}</p>
                                     </div>
@@ -44,7 +44,21 @@ Home | The Qamar Free Library
                     </div>
                 </div>
                 <h2>About Us</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate dignissimos vero quidem dicta nemo enim vitae laboriosam totam sit placeat inventore quia non exercitationem assumenda, ex, hic at, vel veritatis? Voluptatibus libero aliquid, quas, tenetur sequi nisi veniam quae tempore dolorum labore nam nemo. Ipsa facere accusamus dicta omnis amet!</p>
+                <br>
+                <p>The foundation of <b>Muslim Free Library</b> dates back to 1939, but the idea of its necessity was first raised in 1927. It was during this time that <b>Abdul Hamid Abdul Gafoor</b>, a devoted member of the Jamaat, printed and distributed a handbill advocating for the establishment of a library. His initiative sparked a growing conversation within the community.</p>
+                <br>
+                <p>In 1938, a letter published in the newspaper <i>Muslim Gujarat</i> renewed the call to action, urging the creation of a library to serve the intellectual and cultural needs of the Jamaat. <br>With these collective efforts, The Muslim Free Library was established in 1939 with the following aims:</p>
+                <div class="aims">
+                    <ul>
+                        <li style="list-style: disc; margin-left: 1.5rem;">To keep the community informed of national events and world affairs.</li>
+                        <li style="list-style: disc; margin-left: 1.5rem;">To organize debates and lecture programs for intellectual engagement.</li>
+                        <li style="list-style: disc; margin-left: 1.5rem;">To bring together various cultural and literary associations within the Jamaat, fostering unity and collaboration.</li>
+                    </ul>
+                </div>
+                <br>
+                <p>The library has enjoyed the unwavering moral and financial support of the Patni Jamaat and the Patni Cooperative Credit Society from its inception, a partnership that continues to this day. A significant portion of the books and magazines were generously donated by <b>Janab Mohammed Usman Topiwala Sahab</b>, who was also the publisher of the monthly magazine <b>Qamar</b> at the time.</p>
+                <br>
+                <p>In 1942, the untimely passing of Mr. Mohammed Usman Topiwala left a profound impact on the community. To honor his memory, it was decided to incorporate his pen name, "Qamar," into the library’s name. Since then, the library has been known as <b>The Qamar Free Library.</b></p>
             </div>
         </div>
     </section>

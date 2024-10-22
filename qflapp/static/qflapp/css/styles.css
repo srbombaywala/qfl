@@ -718,6 +718,7 @@ footer {
 .about-text {
     flex: 1;    
     padding-right: 2rem; /* Space between text and news */
+    text-align: justify;
 }
 
 .notice-section {
